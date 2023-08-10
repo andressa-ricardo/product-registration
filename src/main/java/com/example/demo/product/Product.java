@@ -1,11 +1,19 @@
 package com.example.demo.product;
 
+import com.example.demo.category.Category;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -18,41 +26,18 @@ public class Product {
 
     private float price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     Product(){
         
     }
 
-    public Long getId(){
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    Product(String name, String description, float price){
+    Product(String name, String description, float price, Category category){
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
     }
 }

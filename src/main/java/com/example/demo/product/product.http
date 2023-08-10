@@ -1,0 +1,13 @@
+POST http://localhost:8080/product
+Content-Type: application/json
+
+{
+    "name": "camiseta rosa",
+    "description": "top demais",
+    "price": 18,
+    "categoryId": 1
+}
+
+###
+
+GET http://localhost:8080/products

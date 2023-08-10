@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.category.Category;
+import com.example.demo.category.CategoryRepository;
+
 @RestController
 public class ProductController {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    ProductController(ProductRepository productRepository) {
+    ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/products")
@@ -27,14 +32,18 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    Product postProduct(@RequestBody() ProductCreationBody body) {
-        Product product = new Product(body.name(), body.description(), body.price());
-        Product p = productRepository.save(product);
-        return p;
+    ResponseEntity<?> postProduct(@RequestBody() ProductCreationBody body) {
+        Optional<Category> category = categoryRepository.findById(body.categoryId());
+        if(category.isPresent()){
+            Product product = new Product(body.name(), body.description(), body.price(), category.get());
+            Product p = productRepository.save(product);
+            return ResponseEntity.ok(p);
+        }else{
+            return ResponseEntity.badRequest().body("NAO TEM categoria com esse id");
+        }
     }
-
-    public record ProductCreationBody(String name, String description, float price) {
-
+    public record ProductCreationBody(String name, String description, float price, Long categoryId) {
+        
     }
 
     @PutMapping("/product/{id}")

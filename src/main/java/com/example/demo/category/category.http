@@ -1,0 +1,10 @@
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+    "name": "arara"
+}
+
+###
+
+GET http://localhost:8080/categories
