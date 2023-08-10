@@ -1,8 +1,7 @@
 ## 💻 API Products com Spring.
 
 
-API com Spring Boot que contém um cadastro de pedidos, como name, description e price e com rotas de PUT e Delete.
-
+Desenvolvi uma API usando Spring Boot que engloba um sistema de registro de pedidos. Cada pedido possui informações essenciais como nome, descrição e preço, sendo possível efetuar operações PUT e DELETE nas rotas correspondentes. Além disso, estabeleci um relacionamento com uma tabela de categorias. Ao cadastrar um produto, é necessário especificar a categoria à qual ele pertence. 
 <hr/>
 
 ## ✏️ Autor:
